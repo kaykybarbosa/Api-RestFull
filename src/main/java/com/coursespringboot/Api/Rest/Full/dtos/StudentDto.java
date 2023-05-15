@@ -13,9 +13,7 @@ public class StudentDto {
     private String name;
     @NotBlank
     private String email;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     @NotNull
     private LocalDate dob;
-    @NotNull
-    private Integer age;
 }

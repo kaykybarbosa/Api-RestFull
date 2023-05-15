@@ -11,8 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path= "api/students")
@@ -34,7 +36,18 @@ public class StudentController {
 
         var studentModel = new StudentModel();
         BeanUtils.copyProperties(studentDto, studentModel);
+        studentModel.setAge(Period.between(studentDto.getDob(), LocalDate.now()).getYears());
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.save(studentModel));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteStudent(@PathVariable(value = "id") Long id){
+        Optional<StudentModel> existsStudent = studentService.findById(id);
+        if(!existsStudent.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found.");
+        }
+
+        studentService.delete(existsStudent.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Studend deleted successfully.");
+    }
 }

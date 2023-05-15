@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -23,5 +24,13 @@ public class StudentService {
 
     public boolean existsByEmail(String email) {
         return studentRepository.existsByEmail(email);
+    }
+
+    public Optional<StudentModel> findById(Long id) {
+        return studentRepository.findById(id);
+    }
+
+    public void delete(StudentModel existsStudent) {
+        studentRepository.delete(existsStudent);
     }
 }
