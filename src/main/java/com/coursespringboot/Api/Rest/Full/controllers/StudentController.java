@@ -27,10 +27,13 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> sabeStudent(@RequestBody @Valid StudentDto studentDto){
+    public ResponseEntity<Object> saveStudent(@RequestBody @Valid StudentDto studentDto){
+        if (studentService.existsByEmail(studentDto.getEmail())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already registered.");
+        }
+
         var studentModel = new StudentModel();
         BeanUtils.copyProperties(studentDto, studentModel);
-        studentModel.setDob(LocalDate.now(ZoneId.of("UTC")));
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.save(studentModel));
     }
 

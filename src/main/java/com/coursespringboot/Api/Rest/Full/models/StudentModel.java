@@ -21,11 +21,13 @@ public class StudentModel implements Serializable {
             strategy = GenerationType.SEQUENCE,
             generator = "student_sequence"
     )
-
     private Long id;
+    @Column(nullable = false)
     private String name;
-    @Column(unique = true)
+    @Column(nullable = false,unique = true)
     private String email;
+    @Column(nullable = false)
     private LocalDate dob;
+    @Column(nullable = false)
     private Integer age;
 }

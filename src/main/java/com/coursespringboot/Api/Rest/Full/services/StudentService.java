@@ -20,4 +20,8 @@ public class StudentService {
     public Object save(StudentModel studentModel) {
         return studentRepository.save(studentModel);
     }
+
+    public boolean existsByEmail(String email) {
+        return studentRepository.existsByEmail(email);
+    }
 }
