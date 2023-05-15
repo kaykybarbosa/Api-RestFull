@@ -13,6 +13,6 @@ public class StudentModel {
     private LocalDate dob;
     private Integer age;
 
-    public StudentModel(long l, String kaio, String mail, LocalDate of, int i) {
+    public StudentModel(long l, String kaio, String email, LocalDate of, int i) {
     }
 }
