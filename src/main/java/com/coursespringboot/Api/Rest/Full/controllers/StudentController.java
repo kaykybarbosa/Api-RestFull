@@ -29,6 +29,15 @@ public class StudentController {
         return studentService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getOneStudent(@PathVariable(value = "id") Long id){
+        if(!studentService.findById(id).isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found.");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.findById(id));
+    }
+
     @PostMapping
     public ResponseEntity<Object> saveStudent(@RequestBody @Valid StudentDto studentDto){
         if (studentService.existsByEmail(studentDto.getEmail())){
