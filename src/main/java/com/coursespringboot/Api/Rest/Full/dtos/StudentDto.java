@@ -12,9 +12,10 @@ import java.time.LocalDate;
 public class StudentDto {
     @NotBlank
     private String name;
+    @Email
     @NotBlank
     private String email;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
     private LocalDate dob;
 }
